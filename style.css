@@ -1,0 +1,330 @@
+/* ============================================================
+   SANTA ROSA 3D — Stylesheet
+   Palette
+     Petroleum blue  #1F3A5F
+     Terracotta      #C65D3B
+     Light cream     #F4EDE4
+     Concrete gray   #5C5C5C
+     Leaf green      #4F7A5B
+============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Mulish:wght@300;400;500&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:    #1F3A5F;
+  --terra:   #C65D3B;
+  --cream:   #F4EDE4;
+  --gray:    #5C5C5C;
+  --green:   #4F7A5B;
+  --dark:    #0d1e35;
+
+  --glass:        rgba(13, 30, 53, 0.75);
+  --glass-border: rgba(244, 237, 228, 0.12);
+  --blur:         blur(16px);
+
+  --r:  10px;
+  --r2: 20px;
+  --sh: 0 8px 40px rgba(0,0,0,0.4);
+
+  --f-head: 'Playfair Display', Georgia, serif;
+  --f-body: 'Mulish', system-ui, sans-serif;
+  --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--dark);
+  font-family: var(--f-body);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Canvas ── */
+#c {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── UI overlay wrapper ── */
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ════════════════════════════════════
+   BRAND
+════════════════════════════════════ */
+#brand {
+  position: absolute;
+  top: 24px; left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.brand-pip {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--terra);
+  box-shadow: 0 0 0 3px rgba(198,93,59,0.25), 0 0 14px rgba(198,93,59,0.5);
+  flex-shrink: 0;
+  animation: pip-pulse 2.4s ease-in-out infinite;
+}
+@keyframes pip-pulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(198,93,59,0.25), 0 0 14px rgba(198,93,59,0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(198,93,59,0.1),  0 0 22px rgba(198,93,59,0.7); }
+}
+
+.brand-text { display: flex; flex-direction: column; }
+
+.brand-title {
+  font-family: var(--f-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.brand-sub {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: rgba(244,237,228,0.5);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   BUTTONS
+════════════════════════════════════ */
+#ctrl-group {
+  position: absolute;
+  top: 24px; right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: all;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--r2);
+  font-family: var(--f-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  background: var(--terra);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(198,93,59,0.45);
+}
+.btn--primary:hover {
+  background: #d46840;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 26px rgba(198,93,59,0.6);
+}
+
+.btn--ghost {
+  background: var(--glass);
+  color: rgba(244,237,228,0.85);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.btn--ghost:hover {
+  background: rgba(31,58,95,0.85);
+  transform: translateY(-2px);
+}
+
+.btn--sm { padding: 7px 14px; font-size: 0.74rem; }
+
+.btn-icon { font-size: 0.85rem; }
+
+/* ════════════════════════════════════
+   COMPASS
+════════════════════════════════════ */
+#compass {
+  position: absolute;
+  bottom: 28px; left: 24px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ════════════════════════════════════
+   TOUR PROGRESS BAR
+════════════════════════════════════ */
+#tour-bar {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 22px;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r2);
+  pointer-events: all;
+  transition: opacity 0.3s, transform 0.3s;
+}
+#tour-bar.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(8px); }
+
+.tour-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244,237,228,0.5);
+}
+
+#tour-pips { display: flex; gap: 7px; }
+
+.t-pip {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(244,237,228,0.2);
+  transition: background 0.3s, transform 0.3s;
+}
+.t-pip.active  { background: var(--terra); transform: scale(1.4); }
+.t-pip.visited { background: var(--green); }
+
+/* ════════════════════════════════════
+   INFO CARD
+════════════════════════════════════ */
+#info-card {
+  position: absolute;
+  bottom: 28px; right: 24px;
+  width: 290px;
+  padding: 26px 24px 22px;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  pointer-events: all;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+#info-card.hidden { opacity: 0; pointer-events: none; transform: translateY(10px); }
+
+#info-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: none;
+  border: none;
+  color: rgba(244,237,228,0.4);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+#info-close:hover { color: var(--cream); }
+
+#info-emoji {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+#info-title {
+  font-family: var(--f-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--cream);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+#info-body {
+  font-size: 0.79rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(244,237,228,0.65);
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+#info-cta { width: 100%; justify-content: center; }
+
+/* ════════════════════════════════════
+   TOOLTIP
+════════════════════════════════════ */
+#tip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99;
+  padding: 6px 13px;
+  background: var(--blue);
+  border: 1px solid rgba(244,237,228,0.18);
+  border-radius: 6px;
+  font-family: var(--f-body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--cream);
+  white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 10px));
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: opacity 0.15s;
+}
+#tip.hidden { opacity: 0; }
+
+/* ════════════════════════════════════
+   HOTSPOT LABEL SPRITES (DOM-based)
+════════════════════════════════════ */
+.hs-label {
+  position: fixed;
+  pointer-events: none;
+  z-index: 8;
+  font-family: var(--f-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  background: rgba(13,30,53,0.82);
+  border: 1px solid rgba(244,237,228,0.14);
+  padding: 3px 9px;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 0.2s;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 520px) {
+  #info-card { width: calc(100vw - 32px); right: 16px; bottom: 16px; }
+  #ctrl-group { top: 14px; right: 14px; }
+  #brand { top: 14px; left: 14px; }
+  #tour-bar { width: calc(100vw - 32px); }
+}
+
+/* ════════════════════════════════════
+   UTILITY
+════════════════════════════════════ */
+.hidden { display: none !important; }

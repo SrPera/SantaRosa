@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santa Rosa · Mapa 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Mulish:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Canvas 3D -->
+  <canvas id="c"></canvas>
+
+  <!-- UI Overlay -->
+  <div id="ui">
+
+    <!-- Branding top-left -->
+    <header id="brand">
+      <div class="brand-pip"></div>
+      <div class="brand-text">
+        <span class="brand-title">Santa Rosa</span>
+        <span class="brand-sub">Cali · Colombia</span>
+      </div>
+    </header>
+
+    <!-- Controls top-right -->
+    <div id="ctrl-group">
+      <button id="btn-tour" class="btn btn--primary">
+        <span class="btn-icon">▶</span> Iniciar recorrido
+      </button>
+      <button id="btn-reset" class="btn btn--ghost">
+        <span class="btn-icon">⟳</span> Vista inicial
+      </button>
+    </div>
+
+    <!-- Compass bottom-left -->
+    <div id="compass">
+      <svg viewBox="0 0 40 40" width="40" height="40">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(244,237,228,0.15)" stroke-width="1"/>
+        <polygon points="20,4 23,20 20,18 17,20" fill="#C65D3B"/>
+        <polygon points="20,36 23,20 20,22 17,20" fill="rgba(244,237,228,0.4)"/>
+        <text x="20" y="11" text-anchor="middle" font-size="6" fill="#C65D3B" font-family="Mulish">N</text>
+      </svg>
+    </div>
+
+    <!-- Tour progress bottom-center -->
+    <div id="tour-bar" class="hidden">
+      <span class="tour-label">Recorrido guiado</span>
+      <div id="tour-pips"></div>
+      <button id="btn-stop" class="btn btn--ghost btn--sm">✕ Detener</button>
+    </div>
+
+    <!-- Info panel bottom-right -->
+    <div id="info-card" class="hidden">
+      <button id="info-close" aria-label="Cerrar">✕</button>
+      <div id="info-emoji"></div>
+      <h2 id="info-title"></h2>
+      <p id="info-body"></p>
+      <button id="info-cta" class="btn btn--primary btn--sm">Ver sección →</button>
+    </div>
+
+  </div>
+
+  <!-- Hover tooltip -->
+  <div id="tip" class="hidden"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
